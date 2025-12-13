@@ -1,0 +1,63 @@
+/* markdown typography */
+.markdown-body {
+font-size: 1.15rem;
+line-height: 1.75;
+letter-spacing: 0.01em;
+color: var(--text);
+}
+
+
+.markdown-body h1 {
+font-size: 1.9rem;
+margin: 0.6rem 0;
+}
+
+
+.markdown-body h2 {
+font-size: 1.55rem;
+margin: 0.55rem 0;
+}
+
+
+.markdown-body h3 {
+font-size: 1.3rem;
+margin: 0.5rem 0;
+}
+
+
+.markdown-body p {
+margin: 0.45rem 0;
+}
+
+
+.markdown-body a {
+color: var(--accent);
+font-weight: 600;
+text-decoration: none;
+}
+
+
+.markdown-body a:hover {
+text-decoration: underline;
+}
+
+
+/* code blocks */
+.markdown-body code {
+background: rgba(46,204,113,0.1);
+padding: 2px 6px;
+border-radius: 6px;
+font-size: 1rem;
+font-family: 'Courier New', monospace;
+}
+
+
+.markdown-body pre {
+background: linear-gradient(180deg, #101816, #0d1311);
+border-left: 4px solid var(--accent);
+padding: 14px 16px;
+border-radius: 8px;
+margin: 0.75rem 0;
+font-size: 1rem;
+overflow-x: auto;
+}

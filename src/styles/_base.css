@@ -1,0 +1,39 @@
+/* reset & base */
+html, body, #root {
+height: 100%;
+margin: 0;
+background: radial-gradient(circle at top, #141917, #0b0d0c 65%);
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+color: var(--text);
+-webkit-font-smoothing: antialiased;
+}
+
+
+/* layout container */
+.app-container {
+display: flex;
+flex-direction: column;
+height: 100vh;
+}
+
+
+/* scrollbar */
+::-webkit-scrollbar {
+width: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+background: rgba(255,255,255,0.06);
+border-radius: 6px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+background: rgba(255,255,255,0.1);
+}
+
+
+::-webkit-scrollbar-track {
+background: transparent;
+}

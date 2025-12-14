@@ -1,0 +1,11 @@
+:root {
+--bg: #0b0d0c;
+--panel: #121614;
+--muted: #9aa3a0;
+--text: #eef1ef;
+--accent: #2ecc71;
+--accent-soft: rgba(46,204,113,0.15);
+--divider: rgba(255,255,255,0.04);
+--code-bg: #0f1513;
+--max-width: 80rem;
+}

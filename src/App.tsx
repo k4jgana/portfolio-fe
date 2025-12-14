@@ -12,6 +12,9 @@ const SUGGESTIONS = [
   "Movie recommendations by Nenad",
 ];
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+// const backendURL = "http://127.0.0.1:8000/"
+
 const App: React.FC = () => {
   const [query, setQuery] = useState("");
   const [conversation, setConversation] = useState<MessageType[]>([]);
@@ -52,7 +55,7 @@ const App: React.FC = () => {
       .join("\n");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/ask", {
+      const response = await fetch(`${backendURL}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: text, history: history || "" }),

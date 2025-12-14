@@ -24,9 +24,10 @@ const App: React.FC = () => {
   const [typingIndex, setTypingIndex] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [conversation, loading]);
+useEffect(() => {
+  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+}, [conversation, displayedContent]);
+
 
   useEffect(() => {
     if (typingMessageIndex === null) return;

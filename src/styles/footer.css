@@ -56,3 +56,32 @@ transition: border-color 0.2s ease;
 footer input[type="text"]:focus {
 border-color: rgba(46,204,113,0.4);
 }
+
+footer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(46, 204, 113, 1);
+  border: 1px solid rgba(46, 204, 113, 0.4);
+  border-radius: 9999px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+
+
+.button-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+

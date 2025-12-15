@@ -1,1 +1,0 @@
-# Simple frontend for chatbot

@@ -8,11 +8,24 @@ interface Props {
   typingMessageIndex: number | null;
   displayedContent: string;
   loading: boolean;
+  showStartupNotice: boolean; 
 }
 
-const Chat: React.FC<Props> = ({ conversation, typingMessageIndex, displayedContent, loading }) => {
+const Chat: React.FC<Props> = ({
+  conversation,
+  typingMessageIndex,
+  displayedContent,
+  loading,
+  showStartupNotice,
+}) => {
   return (
     <div className="chat-container">
+      {showStartupNotice && (
+        <div className="startup-notice">
+          ⏳ First request may take up to 2 minutes while the server starts.
+        </div>
+      )}
+
       {conversation.map((msg, idx) => (
         <Message
           key={idx}
@@ -23,7 +36,7 @@ const Chat: React.FC<Props> = ({ conversation, typingMessageIndex, displayedCont
       ))}
 
       {loading && <Loading />}
-      {/* This div can be used for scrolling if a ref is passed from parent */}
+
       <div />
     </div>
   );

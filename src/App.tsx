@@ -24,6 +24,9 @@ const App: React.FC = () => {
   const [typingIndex, setTypingIndex] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const showStartupNotice = loading && conversation.length === 1 && conversation[0].role === "user";
+
+
 useEffect(() => {
   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 }, [conversation, displayedContent]);
@@ -107,6 +110,7 @@ useEffect(() => {
           typingMessageIndex={typingMessageIndex}
           displayedContent={displayedContent}
           loading={loading}
+          showStartupNotice={showStartupNotice}
         />
         <div ref={messagesEndRef} />
       </main>

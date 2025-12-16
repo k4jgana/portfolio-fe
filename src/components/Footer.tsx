@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Suggestions from "./Suggestions";
 
 interface Props {
@@ -17,34 +17,59 @@ const Footer: React.FC<Props> = ({
   loading,
   suggestions,
   onSuggestionClick,
-}) => (
-  <footer>
-    {suggestions.length > 0 && <Suggestions suggestions={suggestions} onClick={onSuggestionClick} />}
+}) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    <form className="input-container" onSubmit={handleSubmit}>
-      <div className="input-wrapper">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Ask anything about Nenad..."
-          disabled={loading}
-        />
-      </div>
+  // auto-grow textarea height
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [query]);
 
-      <button type="submit" disabled={loading || !query.trim()}>
-        {loading ? (
-          <svg className="button-icon spinning" fill="none" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-          </svg>
-        ) : (
-          <svg className="button-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2z" />
-          </svg>
-        )}
-      </button>
-    </form>
-  </footer>
-);
+  return (
+    <footer>
+      {suggestions.length > 0 && (
+        <Suggestions suggestions={suggestions} onClick={onSuggestionClick} />
+      )}
+
+      <form className="input-container" onSubmit={handleSubmit}>
+        <div className="input-wrapper">
+          <textarea
+            ref={textareaRef}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Ask anything about Nenad..."
+            disabled={loading}
+            rows={1}
+          />
+        </div>
+
+        <button type="submit" disabled={loading || !query.trim()}>
+          {loading ? (
+            <svg className="button-icon spinning" fill="none" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            </svg>
+          ) : (
+            <svg
+              className="button-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 19l9 2-9-18-9 18 9-2z"
+              />
+            </svg>
+          )}
+        </button>
+      </form>
+    </footer>
+  );
+};
 
 export default Footer;

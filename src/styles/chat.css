@@ -1,14 +1,27 @@
 main {
+  overflow: hidden;
   position: relative;
-  padding: 0;          
-  overflow: hidden;    
+  flex: 1;
+  padding: 0;
 }
 
 
+
 .chat-container {
-max-width: var(--max-width);
-margin: 0 auto;
-padding: 0 1.25rem;
+  position: fixed;
+  top: 96px;       /* height of header */
+  bottom: 96px;    /* height of footer */
+  left: 0;
+  right: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.5rem;
+
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
 }
 
 

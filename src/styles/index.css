@@ -8,6 +8,7 @@
 @import "./loading.css";
 @import "./footer.css";
 @import "./responsive.css";
+@import "./login.css";
 
 html,
 body {

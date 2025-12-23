@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import Header from "./components/Header";
 import Chat from "./components/Chat";
 import Footer from "./components/Footer";
+import Login from "./components/Login"; 
 import type { MessageType } from "./components/Message";
 import "./styles/index.css";
-
 
 const SUGGESTIONS = [
   "Nenad Career Info",
@@ -13,7 +13,6 @@ const SUGGESTIONS = [
 ];
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
-// const backendURL = "http://127.0.0.1:8000/"
 
 const App: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -22,15 +21,14 @@ const App: React.FC = () => {
   const [typingMessageIndex, setTypingMessageIndex] = useState<number | null>(null);
   const [displayedContent, setDisplayedContent] = useState("");
   const [typingIndex, setTypingIndex] = useState(0);
+  const [userEmail, setUserEmail] = useState<string | "guest" | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const showStartupNotice = loading && conversation.length === 1 && conversation[0].role === "user";
 
-
-useEffect(() => {
-  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-}, [conversation, displayedContent]);
-
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [conversation, displayedContent]);
 
   useEffect(() => {
     if (typingMessageIndex === null) return;
@@ -62,7 +60,11 @@ useEffect(() => {
       const response = await fetch(`${backendURL}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: text, history: history || "" }),
+        body: JSON.stringify({
+          query: text,
+          history: history || "",
+          email: userEmail, 
+        }),
       });
 
       const data = await response.json();
@@ -101,29 +103,36 @@ useEffect(() => {
     sendMessage(text);
   };
 
-  return (
-    <div className="app-container">
-      <Header />
-      <main>
-        <Chat
-          conversation={conversation}
-          typingMessageIndex={typingMessageIndex}
-          displayedContent={displayedContent}
-          loading={loading}
-          showStartupNotice={showStartupNotice}
-        />
-        <div ref={messagesEndRef} />
-      </main>
-      <Footer
-        query={query}
-        setQuery={setQuery}
-        handleSubmit={handleSubmit}
+return (
+  <div className="app-container">
+<Header userEmail={userEmail} />
+
+    {userEmail === null && (
+      <Login onLogin={(email) => setUserEmail(email)} />
+    )}
+
+    <main>
+      <Chat
+        conversation={conversation}
+        typingMessageIndex={typingMessageIndex}
+        displayedContent={displayedContent}
         loading={loading}
-        suggestions={conversation.length === 0 ? SUGGESTIONS : []}
-        onSuggestionClick={handleSuggestionClick}
+        showStartupNotice={showStartupNotice}
       />
-    </div>
-  );
+      <div ref={messagesEndRef} />
+    </main>
+
+    <Footer
+      query={query}
+      setQuery={setQuery}
+      handleSubmit={handleSubmit}
+      loading={loading}
+      suggestions={conversation.length === 0 ? SUGGESTIONS : []}
+      onSuggestionClick={handleSuggestionClick}
+    />
+  </div>
+);
+
 };
 
 export default App;

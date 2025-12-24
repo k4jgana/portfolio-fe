@@ -1,20 +1,18 @@
 main {
-  overflow: hidden;
   position: relative;
   flex: 1;
+  overflow: hidden; /* main itself doesn't scroll */
   padding: 0;
 }
 
-
-
 .chat-container {
-  position: fixed;
-  top: 96px;       /* height of header */
-  bottom: 96px;    /* height of footer */
+  position: absolute;       /* stays within main */
+  top: 96px;                /* below header */
+  bottom: 96px;             /* above footer */
   left: 0;
   right: 0;
 
-  overflow-y: auto;
+  overflow-y: auto;         /* enable scrolling */
   overflow-x: hidden;
 
   max-width: var(--max-width);
@@ -23,6 +21,8 @@ main {
 
   -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
 }
+
+
 
 
 /* empty state + suggestions */

@@ -7,12 +7,13 @@ import type { MessageType } from "./components/Message";
 import "./styles/index.css";
 
 const SUGGESTIONS = [
-  "Nenad Career Info",
-  "Album recommendations by Nenad",
-  "Movie recommendations by Nenad",
+  "Give me Nenad Career Info",
+  "Give me Album recommendations by Nenad",
+  "Give me Movie recommendations by Nenad",
 ];
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
+// const backendURL = " http://127.0.0.1:8000";
 
 const App: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -23,6 +24,20 @@ const App: React.FC = () => {
   const [typingIndex, setTypingIndex] = useState(0);
   const [userEmail, setUserEmail] = useState<string | "guest" | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Add a new ref
+const chatContainerRef = useRef<HTMLDivElement>(null);
+
+// Replace your current useEffect for scrolling:
+
+useEffect(() => {
+  if (!chatContainerRef.current) return;
+  chatContainerRef.current.scrollTo({
+    top: chatContainerRef.current.scrollHeight,
+    behavior: "smooth",
+  });
+}, [conversation, displayedContent]);
+
 
   const showStartupNotice = loading && conversation.length === 1 && conversation[0].role === "user";
 
@@ -112,12 +127,14 @@ return (
     )}
 
     <main>
+
       <Chat
         conversation={conversation}
         typingMessageIndex={typingMessageIndex}
         displayedContent={displayedContent}
         loading={loading}
         showStartupNotice={showStartupNotice}
+        chatContainerRef={chatContainerRef}
       />
       <div ref={messagesEndRef} />
     </main>

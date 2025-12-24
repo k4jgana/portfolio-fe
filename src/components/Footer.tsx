@@ -36,14 +36,21 @@ const Footer: React.FC<Props> = ({
 
       <form className="input-container" onSubmit={handleSubmit}>
         <div className="input-wrapper">
-          <textarea
-            ref={textareaRef}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Ask anything about Nenad..."
-            disabled={loading}
-            rows={1}
-          />
+<textarea
+  ref={textareaRef}
+  value={query}
+  onChange={(e) => setQuery(e.target.value)}
+  placeholder="Ask anything about Nenad..."
+  disabled={loading}
+  rows={1}
+  onKeyDown={(e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault(); // prevent newline
+      handleSubmit();      // submit the message
+    }
+  }}
+/>
+
         </div>
 
         <button type="submit" disabled={loading || !query.trim()}>

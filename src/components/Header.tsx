@@ -17,12 +17,11 @@ const Header: React.FC<HeaderProps> = ({ userEmail }) => (
       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <div className="header-icon">🤖</div>
         <div className="header-text">
-          <h1>Nenad Kajgana AI Clanker</h1>
+          <h1>AI Clanker</h1>
         </div>
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        {/* Display logged-in user */}
         {userEmail && (
           <span
             style={{

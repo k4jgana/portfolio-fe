@@ -8,7 +8,7 @@ main {
 .chat-container {
   position: absolute;       /* stays within main */
   top: 96px;                /* below header */
-  bottom: 96px;             /* above footer */
+  bottom: 110px;             /* above footer */
   left: 0;
   right: 0;
 

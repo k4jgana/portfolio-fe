@@ -118,6 +118,8 @@ useEffect(() => {
     sendMessage(text);
   };
 
+  console.log(SUGGESTIONS)
+
 return (
   <div className="app-container">
 <Header userEmail={userEmail} />
@@ -144,7 +146,7 @@ return (
       setQuery={setQuery}
       handleSubmit={handleSubmit}
       loading={loading}
-      suggestions={conversation.length === 0 ? SUGGESTIONS : []}
+      suggestions={[]}
       onSuggestionClick={handleSuggestionClick}
     />
   </div>

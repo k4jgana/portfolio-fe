@@ -1,53 +1,85 @@
-@media (max-width: 900px) {
-:root {
---max-width: 56rem;
-}
-
-
-.markdown-body {
-font-size: 1.05rem;
-}
-
-
-header {
-padding: 1rem;
-}
-
-
-main {
-padding: 1.5rem 1rem;
-}
-
-
-.message-wrapper {
-padding: 1.25rem 1rem;
-}
-}
-
-
 @media (max-width: 600px) {
-.header-text h1 {
-font-size: 1.2rem;
-}
+  /* 1. Chat Area: Balanced spacing for the keyboard and header */
+  .chat-container {
+    top: 65px !important;    /* Slimmer header space */
+    bottom: 80px !important;  /* Slimmer footer space */
+    padding: 1rem 0.5rem !important;
+  }
 
+  /* 2. Header: Compact mode */
+  header {
+    padding: 0.6rem 1rem !important;
+  }
 
-.header-text p {
-font-size: 0.8rem;
-}
+  .header-icon {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.1rem;
+  }
 
+  .header-text h1 {
+    font-size: 1rem;
+  }
 
-.input-container {
-padding: 0 0.5rem;
-}
+  .header-text p {
+    font-size: 0.75rem;
+  }
 
+  /* 3. Footer & Input: Prevents overflow and aligns the button */
+  footer {
+    padding: 0.6rem 0.8rem !important;
+  }
 
-footer input[type="text"] {
-font-size: 0.95rem;
-padding: 0.75rem 1rem;
-}
+  .input-container {
+    display: flex;
+    align-items: center; /* Centers button vertically with textarea */
+    padding: 0 !important;
+    gap: 0.5rem;
+  }
 
+  .input-wrapper {
+    flex: 1; /* Forces textarea to take remaining width */
+    display: flex;
+  }
 
-footer button {
-padding: 0.7rem 1.2rem;
-}
+  footer textarea, 
+  footer input[type="text"] {
+    width: 100% !important;
+    min-height: 42px !important; /* Proper height for thumb-tapping */
+    font-size: 16px !important;  /* Stops iOS auto-zoom */
+    padding: 0.6rem 1rem !important;
+    border-radius: 24px !important;
+  }
+
+  footer button {
+    width: 42px !important;      /* Square/Circle button */
+    height: 42px !important;
+    flex-shrink: 0;             /* Stops button from getting squashed */
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+  }
+
+  /* 4. Messages: Make them look like bubbles */
+  .message-wrapper {
+    padding: 0.75rem !important;
+    margin: 0.4rem 0.5rem !important;
+    border-radius: 12px !important;
+    border-bottom: none !important;
+  }
+
+  .message-wrapper.ai {
+    margin-right: 2rem !important; /* Creates a staggered look */
+  }
+
+  .message-wrapper.user {
+    margin-left: 2rem !important;
+  }
+
+  .markdown-body {
+    font-size: 0.95rem !important;
+    line-height: 1.45;
+  }
 }

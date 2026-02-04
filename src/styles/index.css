@@ -12,6 +12,14 @@
 
 html,
 body {
-  height: 100%;
-  overflow: hidden;
+  height: 100dvh; /* Dynamic viewport height: accounts for mobile browser bars */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents the whole page from bouncing/scrolling */
+}
+
+#root, .app-container {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }

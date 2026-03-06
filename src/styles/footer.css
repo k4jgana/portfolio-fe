@@ -26,7 +26,22 @@ footer {
   display: flex;
   gap: 0.6rem;
   justify-content: center;
-  flex-wrap: wrap; /* Standard behavior for desktop */
+  flex-wrap: wrap;
+}
+
+/* Mobile / small screens */
+@media (max-width: 600px) {
+  .footer-suggestions {
+    justify-content: space-around; /* spread items more */
+  }
+
+  .footer-suggestions > * {
+    flex: 1 1 100%; /* each item takes ~45% width and wraps nicely */
+    text-align: center;
+    min-width: 300px;
+    padding: 1rem 1rem; /* increased from default */
+    min-height: 20px; /* adds more height */
+  }
 }
 
 /* Styling for the suggestion items (pills) */

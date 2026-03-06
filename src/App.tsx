@@ -6,14 +6,8 @@ import Login from "./components/Login";
 import type { MessageType } from "./components/Message";
 import "./styles/index.css";
 
-const SUGGESTIONS = [
-  "Give me Nenad Career Info",
-  "Give me Album recommendations by Nenad",
-  "Give me Movie recommendations by Nenad",
-];
-
-const backendURL = import.meta.env.VITE_BACKEND_URL;
-// const backendURL = " http://127.0.0.1:8000";
+// Backend URL
+const backendURL = "http://192.168.0.101:8000";
 
 const App: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -23,21 +17,25 @@ const App: React.FC = () => {
   const [displayedContent, setDisplayedContent] = useState("");
   const [typingIndex, setTypingIndex] = useState(0);
   const [userEmail, setUserEmail] = useState<string | "guest" | null>(null);
+
+  // Suggestions state (was previously a constant)
+  const [suggestions, setSuggestions] = useState<string[]>([
+    "Give me Nenad Career Info",
+    "Nenad work related to GenAI",
+    "AI Stack Nenad used",
+  ]);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // Add a new ref
-const chatContainerRef = useRef<HTMLDivElement>(null);
-
-// Replace your current useEffect for scrolling:
-
-useEffect(() => {
-  if (!chatContainerRef.current) return;
-  chatContainerRef.current.scrollTo({
-    top: chatContainerRef.current.scrollHeight,
-    behavior: "smooth",
-  });
-}, [conversation, displayedContent]);
-
+  // Auto scroll chat container
+  useEffect(() => {
+    if (!chatContainerRef.current) return;
+    chatContainerRef.current.scrollTo({
+      top: chatContainerRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [conversation, displayedContent]);
 
   const showStartupNotice = loading && conversation.length === 1 && conversation[0].role === "user";
 
@@ -45,6 +43,7 @@ useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [conversation, displayedContent]);
 
+  // Typing effect for AI messages
   useEffect(() => {
     if (typingMessageIndex === null) return;
     if (typingMessageIndex >= conversation.length) return;
@@ -65,6 +64,7 @@ useEffect(() => {
     }
   }, [typingIndex, typingMessageIndex, conversation]);
 
+  // Send message to backend
   const sendMessage = async (text: string) => {
     const history = conversation
       .slice(-6)
@@ -100,6 +100,7 @@ useEffect(() => {
     }
   };
 
+  // Handle form submit
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!query.trim() || loading) return;
@@ -111,47 +112,49 @@ useEffect(() => {
     sendMessage(text);
   };
 
+  // Handle suggestion click and remove clicked suggestion
   const handleSuggestionClick = (text: string) => {
     if (loading) return;
+
+    // Add to conversation
     setConversation((prev) => [...prev, { role: "user", content: text }]);
     setLoading(true);
     sendMessage(text);
+
+    // Remove clicked suggestion
+    setSuggestions((prev) => prev.filter((s) => s !== text));
   };
 
-  console.log(SUGGESTIONS)
+  return (
+    <div className="app-container">
+      <Header userEmail={userEmail} />
 
-return (
-  <div className="app-container">
-<Header userEmail={userEmail} />
+      {userEmail === null && (
+        <Login onLogin={(email) => setUserEmail(email)} />
+      )}
 
-    {userEmail === null && (
-      <Login onLogin={(email) => setUserEmail(email)} />
-    )}
+      <main>
+        <Chat
+          conversation={conversation}
+          typingMessageIndex={typingMessageIndex}
+          displayedContent={displayedContent}
+          loading={loading}
+          showStartupNotice={showStartupNotice}
+          chatContainerRef={chatContainerRef}
+        />
+        <div ref={messagesEndRef} />
+      </main>
 
-    <main>
-
-      <Chat
-        conversation={conversation}
-        typingMessageIndex={typingMessageIndex}
-        displayedContent={displayedContent}
+      <Footer
+        query={query}
+        setQuery={setQuery}
+        handleSubmit={handleSubmit}
         loading={loading}
-        showStartupNotice={showStartupNotice}
-        chatContainerRef={chatContainerRef}
+        suggestions={suggestions}   // Pass the state
+        onSuggestionClick={handleSuggestionClick} // Updated handler
       />
-      <div ref={messagesEndRef} />
-    </main>
-
-    <Footer
-      query={query}
-      setQuery={setQuery}
-      handleSubmit={handleSubmit}
-      loading={loading}
-      suggestions={[]}
-      onSuggestionClick={handleSuggestionClick}
-    />
-  </div>
-);
-
+    </div>
+  );
 };
 
-export default App;
+export default App; 

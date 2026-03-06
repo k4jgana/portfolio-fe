@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Suggestions from "./Suggestions";
 
+
 interface Props {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;

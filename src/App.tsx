@@ -7,7 +7,7 @@ import type { MessageType } from "./components/Message";
 import "./styles/index.css";
 
 // Backend URL
-const backendURL = "http://192.168.0.101:8000";
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const App: React.FC = () => {
   const [query, setQuery] = useState("");

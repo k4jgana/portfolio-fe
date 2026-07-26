@@ -1,33 +1,29 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 
 export type MessageType = {
   role: "user" | "ai";
   content: string;
+  kind?: "default" | "error";
 };
 
 interface Props {
   message: MessageType;
-  isTyping?: boolean;
-  displayedContent?: string;
 }
 
-const Message: React.FC<Props> = ({ message, isTyping, displayedContent }) => {
-  const content = isTyping ? displayedContent : message.content;
-
+const Message: React.FC<Props> = ({ message }) => {
   return (
-    <div className={`message-wrapper ${message.role}`}>
-      <div className="message-card">
-        <div className="message-meta">{message.role === "user" ? "You" : "Clanker"}</div>
-        <div className="message-markdown markdown-body">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-            {content}
+    <article className={`message message--${message.role} ${message.kind === "error" ? "message--error" : ""}`}>
+      <p className="message__author">{message.role === "user" ? "You" : "Nenad AI"}</p>
+      <div className="message__bubble">
+        <div className="markdown-body">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} skipHtml>
+            {message.content}
           </ReactMarkdown>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

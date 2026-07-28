@@ -61,6 +61,7 @@ export type PortfolioSnapshot = {
   }>;
   links: {
     profile: PortfolioLink;
+    linkedin: PortfolioLink;
     frontend: PortfolioLink;
     backend: PortfolioLink;
     letterboxd: PortfolioLink;
@@ -81,7 +82,7 @@ export const portfolio = {
   location: "Macedonia",
   hero: {
     eyebrow: "Hello, I’m Nenad — ML/ AI engineer",
-    title: "Machine Learning Engineer building practical NLP and GenAI systems.",
+    title: "AI/ML Engineer building practical NLP and GenAI systems.",
     summary:
       "I turn language models, retrieval pipelines, and product interfaces into software people can actually use.",
   },
@@ -237,6 +238,7 @@ export const portfolio = {
   ],
   links: {
     profile: { label: "GitHub profile", href: "https://github.com/k4jgana" },
+    linkedin: { label: "LinkedIn profile", href: "https://www.linkedin.com/in/nenad-kajgana/" },
     frontend: { label: "Portfolio frontend", href: "https://github.com/k4jgana/portfolio-fe" },
     backend: { label: "AI assistant source", href: "https://github.com/k4jgana/portfolio-be" },
     letterboxd: { label: "Letterboxd profile", href: "https://letterboxd.com/k4jgana/" },

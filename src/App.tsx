@@ -2,9 +2,21 @@ import { useState } from "react";
 import ChatAssistant from "./components/ChatAssistant";
 import type { ChatIntent } from "./components/ChatAssistant";
 import { GitHubIcon } from "./components/GitHubIcon";
+import { LinkedInIcon } from "./components/LinkedInIcon";
 import { portfolio } from "./data/portfolio.v1";
 import portraitUrl from "./assets/MACEDONIA_NENAD KAJGANA_GUEST.jpg";
+import theGreatBeautyPoster from "./assets/130523-the-great-beauty-0-2000-0-3000-crop.jpg";
+import burningPoster from "./assets/422035-burning-0-2000-0-3000-crop.jpg";
+import gattacaPoster from "./assets/51370-gattaca-0-2000-0-3000-crop.jpg";
+import wingsOfDesirePoster from "./assets/51907-wings-of-desire-0-2000-0-3000-crop.jpg";
 import "./styles/index.css";
+
+const topFilms = [
+  { title: "The Great Beauty", poster: theGreatBeautyPoster },
+  { title: "Burning", poster: burningPoster },
+  { title: "Gattaca", poster: gattacaPoster },
+  { title: "Wings of Desire", poster: wingsOfDesirePoster },
+];
 
 function ArrowIcon() {
   return <span aria-hidden="true">↗</span>;
@@ -45,6 +57,16 @@ function App() {
             <GitHubIcon />
             <span>GitHub</span>
           </a>
+          <a
+            className="site-nav__linkedin"
+            href={portfolio.links.linkedin.href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Visit Nenad Kajgana’s LinkedIn profile (opens in a new tab)"
+          >
+            <LinkedInIcon />
+            <span>LinkedIn</span>
+          </a>
           <button type="button" className="site-nav__ask" onClick={() => askAbout("")}>Ask AI</button>
         </nav>
       </header>
@@ -54,7 +76,7 @@ function App() {
           <div className="hero__copy">
             <p className="kicker"><span />{portfolio.hero.eyebrow}</p>
             <h1 id="hero-title">
-              Machine Learning Engineer building <em>practical</em> NLP and GenAI systems.
+              AI/ML Engineer building <em>practical</em> NLP and GenAI systems.
             </h1>
             <p className="hero__summary">{portfolio.hero.summary}</p>
             <div className="hero__actions">
@@ -89,20 +111,36 @@ function App() {
         <section className="about section" id="about" aria-labelledby="about-title">
           <div className="section-heading">
             <p className="section-index">01 / About</p>
-            <h2 id="about-title">Useful systems, strange ideas, and the <em>fun</em> of making both real.</h2>
+            <h2 className="twin-peaks-title" id="about-title"><span>Fire,</span> Walk with me</h2>
           </div>
           <div className="about__content">
             <figure className="about__portrait">
               <div className="about__portrait-frame">
                 <img src={portraitUrl} alt="Nenad Kajgana" width="500" height="500" loading="lazy" decoding="async" />
               </div>
-              <figcaption><span>NK / Profile</span><span>Human, confirmed</span></figcaption>
+              <figcaption><span>NK / Profile</span></figcaption>
             </figure>
             <div className="about__body">
-              {portfolio.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              <div className="letterboxd-top-four">
+                <div className="letterboxd-top-four__header">
+                  <span className="letterboxd-mark" aria-hidden="true"><i /><i /><i /></span>
+                  <p>Nenad’s Top Four</p>
+                </div>
+                <div className="letterboxd-top-four__grid">
+                  {topFilms.map((film, index) => (
+                    <figure className="film-poster" key={film.title}>
+                      <div className="film-poster__image">
+                        <img src={film.poster} alt={`${film.title} poster`} loading="lazy" decoding="async" />
+                        <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                      </div>
+                      <figcaption>{film.title}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </div>
               <div className="about__links">
                 <a className="text-link" href={portfolio.links.letterboxd.href} target="_blank" rel="noreferrer" aria-label="View Nenad’s Letterboxd profile (opens in a new tab)">See what I’m watching on Letterboxd <ArrowIcon /></a>
-                <button type="button" className="text-link" onClick={() => askAbout("Tell me about Nenad’s passion projects and what he likes building for fun.")}>Ask AI about the side quests <ArrowIcon /></button>
+                <button type="button" className="text-link" onClick={() => askAbout("What music is Nenad currently listening to?")}>Ask AI for music recommendations <ArrowIcon /></button>
               </div>
             </div>
           </div>
@@ -114,7 +152,7 @@ function App() {
               <p className="section-index">02 / Experience</p>
               <h2 id="experience-title">A path through data, product, and intelligent systems.</h2>
             </div>
-            <p className="section-note">Current workforce intelligence at HTEC, backed by a foundation in NLP and product engineering.</p>
+            <p className="section-note">Currently Machine Learning Engineer at HTEC</p>
           </div>
 
           <div className="timeline">
@@ -214,9 +252,10 @@ function App() {
       </main>
 
       <footer className="site-footer">
-        <div className="site-footer__brand"><span>{portfolio.initials}</span><p>{portfolio.name}<small>Machine Learning / AI Engineer</small></p></div>
+        <div className="site-footer__brand"><span>{portfolio.initials}</span><p>{portfolio.name}<small>AI/ML Engineer</small></p></div>
         <nav aria-label="Profiles and source repositories">
           <a href={portfolio.links.profile.href} target="_blank" rel="noreferrer">GitHub profile <ArrowIcon /></a>
+          <a href={portfolio.links.linkedin.href} target="_blank" rel="noreferrer">LinkedIn <ArrowIcon /></a>
           <a href={portfolio.links.letterboxd.href} target="_blank" rel="noreferrer">Letterboxd <ArrowIcon /></a>
           <a href={portfolio.links.frontend.href} target="_blank" rel="noreferrer">Frontend source <ArrowIcon /></a>
           <a href={portfolio.links.backend.href} target="_blank" rel="noreferrer">AI backend source <ArrowIcon /></a>

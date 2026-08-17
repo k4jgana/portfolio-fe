@@ -25,7 +25,8 @@ This document tracks relevant automation, deployment, and configuration agents i
 ### Environment Variables
 - Managed via `.env` at build time:
   - `VITE_BACKEND_URL=/ask` (relative path for API calls to backend)
-  - No Firebase client configuration is used; the guest chat calls the backend through `/ask`.
+  - `VITE_FIREBASE_*` configures Google authentication for the private `/cdinja` route.
+  - The guest chat remains unauthenticated and calls the backend through `/ask`.
 
 ### CI/CD (if configured)
 - Can document GitHub Actions or other CI here if automating build/deploy with push hooks.

@@ -566,7 +566,7 @@ svg {
 
 .section-heading h2,
 .education-interests h2,
-.certification h2 {
+.certification h3 {
   margin: 0;
   font-size: clamp(2.3rem, 4.6vw, 5.2rem);
   font-weight: 700;
@@ -1157,24 +1157,37 @@ svg {
   content: "/";
 }
 
-.certification {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
-  gap: clamp(44px, 8vw, 120px);
-  align-items: center;
+.certifications {
   padding: clamp(48px, 7vw, 96px);
   border-top: 0;
   background: var(--blue);
   color: var(--ink);
 }
 
-.certification .section-index {
+.certifications > .section-index {
   color: var(--ink);
   opacity: 0.58;
 }
 
+.certifications__list {
+  display: grid;
+  margin-top: 52px;
+}
+
+.certification {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+  gap: clamp(44px, 8vw, 120px);
+  align-items: center;
+}
+
+.certification + .certification {
+  padding-top: clamp(64px, 9vw, 128px);
+  border-top: 1px solid rgba(9, 9, 11, 0.28);
+}
+
 .certification__issuer {
-  margin: 52px 0 14px;
+  margin: 0 0 14px;
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
@@ -1182,7 +1195,7 @@ svg {
   letter-spacing: 0.12em;
 }
 
-.certification h2 {
+.certification h3 {
   max-width: 850px;
   font-size: clamp(2.8rem, 5.5vw, 6.1rem);
 }
@@ -2222,16 +2235,12 @@ svg {
     margin-top: 50px;
   }
 
-  .certification {
+  .certifications {
     width: 100%;
     padding: 62px 28px;
   }
 
-  .certification__issuer {
-    margin-top: 44px;
-  }
-
-  .certification h2 {
+  .certification h3 {
     font-size: clamp(2.7rem, 13vw, 4.6rem);
   }
 

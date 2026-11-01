@@ -213,20 +213,27 @@ function App() {
           </div>
         </section>
 
-        <section className="certification section" id="certification" aria-labelledby="certification-title">
-          <div className="certification__copy">
-            <p className="section-index">05 / Certification</p>
-            <p className="certification__issuer">Certified by {portfolio.certification.issuer}</p>
-            <h2 id="certification-title">{portfolio.certification.title}</h2>
-            <p>{portfolio.certification.description}</p>
-            <a className="button certification__link" href={portfolio.certification.href} target="_blank" rel="noreferrer" aria-label="Verify Nenad’s Anthropic certification on Credly (opens in a new tab)">
-              Verify on Credly <ArrowIcon />
-            </a>
+        <section className="certifications section" id="certification" aria-labelledby="certifications-title">
+          <p className="section-index">05 / Certifications</p>
+          <h2 className="sr-only" id="certifications-title">Professional certifications</h2>
+          <div className="certifications__list">
+            {portfolio.certifications.map((certification) => (
+              <article className="certification" key={certification.title}>
+                <div className="certification__copy">
+                  <p className="certification__issuer">Certified by {certification.issuer}</p>
+                  <h3>{certification.title}</h3>
+                  <p>{certification.description}</p>
+                  <a className="button certification__link" href={certification.href} target="_blank" rel="noreferrer" aria-label={`Verify Nenad’s ${certification.issuer} certification (opens in a new tab)`}>
+                    Verify credential <ArrowIcon />
+                  </a>
+                </div>
+                <a className="certification__badge" href={certification.href} target="_blank" rel="noreferrer" aria-label={`Open Nenad’s ${certification.title} credential`}>
+                  <img src={certification.image} alt={`${certification.title} badge issued by ${certification.issuer}`} loading="lazy" />
+                  <span>Verified credential <ArrowIcon /></span>
+                </a>
+              </article>
+            ))}
           </div>
-          <a className="certification__badge" href={portfolio.certification.href} target="_blank" rel="noreferrer" aria-label="Open Nenad’s Claude Certified Architect credential on Credly">
-            <img src={portfolio.certification.image} alt="Claude Certified Architect — Foundations badge issued by Anthropic" loading="lazy" />
-            <span>Verified credential <ArrowIcon /></span>
-          </a>
         </section>
 
         <section className="education-interests section" aria-label="Education and interests">

@@ -48,13 +48,13 @@ export type PortfolioSnapshot = {
     period: string;
     location: string;
   };
-  certification: {
+  certifications: Array<{
     title: string;
     issuer: string;
     description: string;
     href: string;
     image: string;
-  };
+  }>;
   interests: Array<{
     title: string;
     detail: string;
@@ -218,14 +218,24 @@ export const portfolio = {
     period: "2019 — 2023",
     location: "Skopje, Macedonia",
   },
-  certification: {
-    title: "Claude Certified Architect — Foundations",
-    issuer: "Anthropic",
-    description:
-      "Designing and building production-grade Claude applications with Claude Code, the Claude Agent SDK, the Claude API, and MCP.",
-    href: "https://www.credly.com/badges/d491f6ba-f6f2-4e4e-81b7-215800ddfb8d/public_url",
-    image: "https://images.credly.com/images/f2040db3-3904-4240-8966-e87b1510bea0/linkedin_thumb_blob",
-  },
+  certifications: [
+    {
+      title: "Claude Certified Architect — Foundations",
+      issuer: "Anthropic",
+      description:
+        "Designing and building production-grade Claude applications with Claude Code, the Claude Agent SDK, the Claude API, and MCP.",
+      href: "https://www.credly.com/badges/d491f6ba-f6f2-4e4e-81b7-215800ddfb8d/public_url",
+      image: "https://images.credly.com/images/f2040db3-3904-4240-8966-e87b1510bea0/linkedin_thumb_blob",
+    },
+    {
+      title: "Databricks Certified Generative AI Engineer Associate",
+      issuer: "Databricks",
+      description:
+        "Designing, building, and deploying performant generative AI solutions with Databricks, including RAG applications and LLM chains.",
+      href: "https://credentials.databricks.com/50c6649d-5973-4c1d-81bf-035c4e7c3461#acc.NBIKkfRS",
+      image: "https://www.databricks.com/sites/default/files/2025-10/associate-badge-gen-ai.png?v=1761153880",
+    },
+  ],
   interests: [
     {
       title: "Music",
